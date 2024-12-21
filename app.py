@@ -7,73 +7,98 @@ api_url = "http://54.89.241.159:8000/predict_churn/"
 # Custom CSS for styling the Streamlit app
 st.markdown("""
     <style>
+        /* Set a clean background color */
         body {
-            background-color: #f0f2f6;
+            background-color: #f5f5f5;
             color: #333;
             font-family: 'Arial', sans-serif;
         }
-        .main {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
+        
+        /* Header section */
         .title {
-            color: #3E8E41;
-            font-size: 32px;
+            color: #2F4F4F;
+            font-size: 36px;
             font-weight: bold;
             text-align: center;
+            padding-top: 30px;
         }
+
+        /* Main container for user input form */
+        .main {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        /* Section titles */
         .header {
             font-size: 24px;
             color: #2F4F4F;
             font-weight: bold;
+            margin-bottom: 20px;
         }
+
+        /* Prediction and suggestion sections */
         .prediction-section {
             margin-top: 20px;
             padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
+            background-color: #E8F5E9;
+            border: 1px solid #4CAF50;
             border-radius: 8px;
         }
+        
+        /* Prediction text styles */
+        .prediction-text {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #388e3c;
+        }
+
+        /* Suggestion section styles */
         .suggestion-section {
             margin-top: 20px;
             padding: 15px;
-            background-color: #E8F5E9;
+            background-color: #FFEBEE;
             border-radius: 8px;
         }
+        
+        /* Error and Success styles */
+        .error {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        .success {
+            color: #388e3c;
+            font-weight: bold;
+        }
+        
+        /* Button styling */
         .btn {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 15px;
+            padding: 12px 20px;
             font-size: 18px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
         }
         .btn:hover {
             background-color: #45a049;
         }
-        .error {
-            color: #d32f2f;
-            font-weight: bold;
-        }
-        .success {
-            color: #388e3c;
-            font-weight: bold;
-        }
     </style>
 """, unsafe_allow_html=True)
 
 # Streamlit user input form
-st.title('Churn Prediction')
+st.markdown('<div class="title">Churn Prediction App</div>', unsafe_allow_html=True)
 
 # Inform the user about the purpose of the form
 st.markdown("""
     <div class="main">
-        <p class="header">Welcome to the Churn Prediction App!</p>
-        <p>To help us predict whether a customer is likely to leave, please input the following details about the customer. 
-        Based on the information you provide, we will predict if the customer is at risk of leaving or not.</p>
+        <p class="header">Welcome! To predict if a customer is likely to leave, please input the following details:</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -141,8 +166,7 @@ if st.button('Predict Churn', key="predict_button"):
         # Prediction Section
         st.markdown(f"""
         <div class="prediction-section">
-            <p class="header">Prediction Result:</p>
-            <p class="{ 'error' if churn_status == 'Yes' else 'success' }">
+            <p class="prediction-text { 'error' if churn_status == 'Yes' else 'success' }">
                 The customer is {'at risk of leaving (Churn Prediction: Yes)' if churn_status == 'Yes' else 'likely to stay (Churn Prediction: No)'}.
             </p>
         </div>
