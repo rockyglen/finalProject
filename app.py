@@ -4,15 +4,78 @@ import requests
 # Define the FastAPI server URL (replace with your EC2 public IP or domain)
 api_url = "http://54.89.241.159:8000/predict_churn/"
 
+# Custom CSS for styling the Streamlit app
+st.markdown("""
+    <style>
+        body {
+            background-color: #f0f2f6;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+        .main {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .title {
+            color: #3E8E41;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .header {
+            font-size: 24px;
+            color: #2F4F4F;
+            font-weight: bold;
+        }
+        .prediction-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .suggestion-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #E8F5E9;
+            border-radius: 8px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .success {
+            color: #388e3c;
+            font-weight: bold;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Streamlit user input form
 st.title('Churn Prediction')
 
 # Inform the user about the purpose of the form
-st.write("""
-    **Welcome to the Churn Prediction App!**  
-    To help us predict whether a customer is likely to leave, please input the following details about the customer.  
-    Based on the information you provide, we will predict if the customer is at risk of leaving or not.
-""")
+st.markdown("""
+    <div class="main">
+        <p class="header">Welcome to the Churn Prediction App!</p>
+        <p>To help us predict whether a customer is likely to leave, please input the following details about the customer. 
+        Based on the information you provide, we will predict if the customer is at risk of leaving or not.</p>
+    </div>
+""", unsafe_allow_html=True)
 
 # User input fields using sliders
 age = st.slider("Age", min_value=0, max_value=100, value=30)
@@ -40,7 +103,7 @@ account_length = st.slider("Account Length", min_value=0, max_value=1000, value=
 extra_data_charges = st.slider("Extra Data Charges", min_value=0, max_value=1000, value=10)
 
 # Button to trigger prediction
-if st.button('Predict Churn'):
+if st.button('Predict Churn', key="predict_button"):
     # Prepare the data
     input_data = {
         "Age": age,
@@ -75,19 +138,39 @@ if st.button('Predict Churn'):
         prediction = response.json()
         churn_status = prediction.get('Predicted Churn')
 
-        # Provide a more meaningful result
+        # Prediction Section
+        st.markdown(f"""
+        <div class="prediction-section">
+            <p class="header">Prediction Result:</p>
+            <p class="{ 'error' if churn_status == 'Yes' else 'success' }">
+                The customer is {'at risk of leaving (Churn Prediction: Yes)' if churn_status == 'Yes' else 'likely to stay (Churn Prediction: No)'}.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Suggested actions Section
         if churn_status == "Yes":
-            st.error(f"The customer is at risk of leaving (Churn Prediction: **Yes**).")
-            st.write("### Suggested actions:")
-            st.write("- Offer retention deals or discounts.")
-            st.write("- Review customer service interactions to improve satisfaction.")
-            st.write("- Investigate the reasons behind the customer’s dissatisfaction.")
+            st.markdown("""
+            <div class="suggestion-section">
+                <p><strong>Suggested Actions:</strong></p>
+                <ul>
+                    <li>Offer retention deals or discounts.</li>
+                    <li>Review customer service interactions to improve satisfaction.</li>
+                    <li>Investigate the reasons behind the customer’s dissatisfaction.</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
         else:
-            st.success(f"The customer is likely to stay (Churn Prediction: **No**).")
-            st.write("### Suggested actions:")
-            st.write("- Continue providing excellent service.")
-            st.write("- Encourage loyalty programs or upsell additional services.")
-            st.write("- Monitor the customer’s behavior for any future risk signals.")
+            st.markdown("""
+            <div class="suggestion-section">
+                <p><strong>Suggested Actions:</strong></p>
+                <ul>
+                    <li>Continue providing excellent service.</li>
+                    <li>Encourage loyalty programs or upsell additional services.</li>
+                    <li>Monitor the customer’s behavior for any future risk signals.</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
 
     else:
         st.error("Error: Unable to get prediction")
