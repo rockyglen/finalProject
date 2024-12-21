@@ -7,6 +7,13 @@ api_url = "http://54.89.241.159:8000/predict_churn/"
 # Streamlit user input form
 st.title('Churn Prediction')
 
+# Inform the user about the purpose of the form
+st.write("""
+    **Welcome to the Churn Prediction App!**  
+    To help us predict whether a customer is likely to leave, please input the following details about the customer.  
+    Based on the information you provide, we will predict if the customer is at risk of leaving or not.
+""")
+
 # User input fields using sliders
 age = st.slider("Age", min_value=0, max_value=100, value=30)
 group_size = st.slider("Group Size", min_value=1, max_value=10, value=2)
@@ -66,6 +73,21 @@ if st.button('Predict Churn'):
 
     if response.status_code == 200:
         prediction = response.json()
-        st.success(f"Prediction Result: {prediction['Predicted Churn']}")
+        churn_status = prediction.get('Predicted Churn')
+
+        # Provide a more meaningful result
+        if churn_status == "Yes":
+            st.error(f"The customer is at risk of leaving (Churn Prediction: **Yes**).")
+            st.write("### Suggested actions:")
+            st.write("- Offer retention deals or discounts.")
+            st.write("- Review customer service interactions to improve satisfaction.")
+            st.write("- Investigate the reasons behind the customer’s dissatisfaction.")
+        else:
+            st.success(f"The customer is likely to stay (Churn Prediction: **No**).")
+            st.write("### Suggested actions:")
+            st.write("- Continue providing excellent service.")
+            st.write("- Encourage loyalty programs or upsell additional services.")
+            st.write("- Monitor the customer’s behavior for any future risk signals.")
+
     else:
         st.error("Error: Unable to get prediction")
