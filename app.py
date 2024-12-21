@@ -7,16 +7,16 @@ api_url = "http://54.89.241.159:8000/predict_churn/"
 # Custom CSS for styling the Streamlit app
 st.markdown("""
     <style>
-        /* Set a dark background for the body */
+        /* Set a dark purple background for the body */
         body {
-            background-color: #2c3e50; /* Dark Blue Background */
+            background-color: #2C3E50; /* Deep Purple */
             color: white;
             font-family: 'Arial', sans-serif;
         }
 
         /* Main title */
         .title {
-            color: #f39c12;
+            color: #E74C3C; /* Bright Red for a modern touch */
             font-size: 36px;
             font-weight: bold;
             text-align: center;
@@ -25,7 +25,7 @@ st.markdown("""
 
         /* Main container for user input form */
         .main {
-            background-color: #34495e;  /* Darker background for main section */
+            background-color: #34495E;  /* Darker gray background for form */
             padding: 25px;
             border-radius: 10px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -35,7 +35,7 @@ st.markdown("""
         /* Section titles */
         .header {
             font-size: 24px;
-            color: #f39c12;
+            color: #ECF0F1;  /* Light gray color */
             font-weight: bold;
             margin-bottom: 20px;
         }
@@ -43,7 +43,7 @@ st.markdown("""
         /* Input labels */
         .label {
             font-size: 16px;
-            color: #ecf0f1; /* Light color for input labels */
+            color: #ECF0F1; /* Light gray color for input labels */
             font-weight: bold;
         }
 
@@ -51,11 +51,11 @@ st.markdown("""
         .prediction-section {
             margin-top: 20px;
             padding: 20px;
-            background-color: #27ae60;  /* Light Green */
-            border: 1px solid #16a085;
+            background-color: #1ABC9C;  /* Teal color */
+            border: 1px solid #16A085;
             border-radius: 8px;
         }
-        
+
         /* Prediction text styles */
         .prediction-text {
             font-size: 18px;
@@ -68,25 +68,25 @@ st.markdown("""
         .suggestion-section {
             margin-top: 20px;
             padding: 15px;
-            background-color: #f39c12;  /* Light Yellow */
+            background-color: #F39C12;  /* Bright Yellow */
             border-radius: 8px;
-            color: #2c3e50;
+            color: #2C3E50;
         }
 
         /* Error and Success styles */
         .error {
-            color: #e74c3c;
+            color: #E74C3C; /* Red for error */
             font-weight: bold;
         }
-        
+
         .success {
-            color: #2ecc71;
+            color: #2ECC71; /* Green for success */
             font-weight: bold;
         }
 
         /* Button styling */
         .btn {
-            background-color: #2980b9;
+            background-color: #16A085;  /* Teal button color */
             color: white;
             padding: 12px 20px;
             font-size: 18px;
@@ -96,7 +96,7 @@ st.markdown("""
         }
 
         .btn:hover {
-            background-color: #3498db;
+            background-color: #1ABC9C;
         }
     </style>
 """, unsafe_allow_html=True)
