@@ -7,16 +7,16 @@ api_url = "http://54.89.241.159:8000/predict_churn/"
 # Custom CSS for styling the Streamlit app
 st.markdown("""
     <style>
-        /* Set a clean background color */
+        /* Set a dark background for the body */
         body {
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: #2c3e50; /* Dark Blue Background */
+            color: white;
             font-family: 'Arial', sans-serif;
         }
-        
-        /* Header section */
+
+        /* Main title */
         .title {
-            color: #2F4F4F;
+            color: #f39c12;
             font-size: 36px;
             font-weight: bold;
             text-align: center;
@@ -25,7 +25,7 @@ st.markdown("""
 
         /* Main container for user input form */
         .main {
-            background-color: #ffffff;
+            background-color: #34495e;  /* Darker background for main section */
             padding: 25px;
             border-radius: 10px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -35,17 +35,24 @@ st.markdown("""
         /* Section titles */
         .header {
             font-size: 24px;
-            color: #2F4F4F;
+            color: #f39c12;
             font-weight: bold;
             margin-bottom: 20px;
+        }
+
+        /* Input labels */
+        .label {
+            font-size: 16px;
+            color: #ecf0f1; /* Light color for input labels */
+            font-weight: bold;
         }
 
         /* Prediction and suggestion sections */
         .prediction-section {
             margin-top: 20px;
             padding: 20px;
-            background-color: #E8F5E9;
-            border: 1px solid #4CAF50;
+            background-color: #27ae60;  /* Light Green */
+            border: 1px solid #16a085;
             border-radius: 8px;
         }
         
@@ -54,31 +61,32 @@ st.markdown("""
             font-size: 18px;
             font-weight: bold;
             text-align: center;
-            color: #388e3c;
+            color: #ffffff;
         }
 
         /* Suggestion section styles */
         .suggestion-section {
             margin-top: 20px;
             padding: 15px;
-            background-color: #FFEBEE;
+            background-color: #f39c12;  /* Light Yellow */
             border-radius: 8px;
+            color: #2c3e50;
         }
-        
+
         /* Error and Success styles */
         .error {
-            color: #d32f2f;
+            color: #e74c3c;
             font-weight: bold;
         }
         
         .success {
-            color: #388e3c;
+            color: #2ecc71;
             font-weight: bold;
         }
-        
+
         /* Button styling */
         .btn {
-            background-color: #4CAF50;
+            background-color: #2980b9;
             color: white;
             padding: 12px 20px;
             font-size: 18px;
@@ -86,8 +94,9 @@ st.markdown("""
             border-radius: 8px;
             cursor: pointer;
         }
+
         .btn:hover {
-            background-color: #45a049;
+            background-color: #3498db;
         }
     </style>
 """, unsafe_allow_html=True)
