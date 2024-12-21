@@ -75,4 +75,7 @@ if st.button("Get Prediction"):
     if "error" in result:
         st.error(f"Error: {result['error']}")
     else:
-        st.success(f"Prediction Result: {result}")
+        if result==0:
+            st.success(f"Prediction Result: No")
+        else:
+            st.success(f"Prediction Result: Yes")
