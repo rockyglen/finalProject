@@ -5,7 +5,7 @@ import requests
 api_url = "http://54.89.241.159:8000/predict_churn/"
 
 # Streamlit user input form
-st.title('Churn Prediction')
+st.title('Churn Prediction (mariangl)')
 
 # User input fields
 age = st.number_input("Age", min_value=0, max_value=100, value=30)
